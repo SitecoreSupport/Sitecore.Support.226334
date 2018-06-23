@@ -18,8 +18,11 @@ namespace Sitecore.Support.ContentTesting.Pipelines.GetTests
         DeviceId = args.DeviceId,
         EnsureTestIsNotRunning = true
       }.GetRenderings())
-      {        
-          args.AddTest(new PersonalizationTest(rendering, args.Item));       
+      {
+        if (string.IsNullOrEmpty(rendering.PersonalizationTest) == false) // This can help to prevent consider as test
+        {
+          args.AddTest(new PersonalizationTest(rendering, args.Item));
+        }
       }
     }
   }
